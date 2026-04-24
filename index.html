@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Avera — Remove friction. Build clarity.</title>
+  <meta name="description" content="Avera helps organizations create structure, reduce unnecessary work, and move forward with confidence." />
+
+  <link rel="preconnect" href="https://rsms.me/" />
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+
+  <style>
+    :root {
+      --bg: #faf9f6;
+      --ink: #1a1a1a;
+      --muted: #6b6b66;
+      --rule: #e6e4dd;
+      --accent: #1a1a1a;
+      --max: 760px;
+      --step: clamp(1.5rem, 2vw, 2rem);
+    }
+
+    @supports (font-variation-settings: normal) {
+      html { font-family: 'Inter var', Inter, system-ui, -apple-system, 'Segoe UI', sans-serif; }
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-feature-settings: "ss01", "cv11";
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    body {
+      font-size: 18px;
+      line-height: 1.6;
+      letter-spacing: -0.005em;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: clamp(1.75rem, 4vw, 2.5rem) clamp(1.5rem, 4vw, 2rem) clamp(4rem, 8vw, 6rem);
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-top: 0.25rem;
+      padding-bottom: clamp(6rem, 14vw, 10rem);
+    }
+
+    .mark {
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      font-size: 1rem;
+    }
+
+    .nav {
+      font-size: 0.9375rem;
+      color: var(--muted);
+      letter-spacing: -0.005em;
+    }
+
+    .nav a {
+      border-bottom: 1px solid transparent;
+      transition: border-color 180ms ease, color 180ms ease;
+    }
+
+    .nav a:hover {
+      color: var(--ink);
+      border-bottom-color: var(--ink);
+    }
+
+    /* Sections */
+    section {
+      padding: clamp(4.5rem, 10vw, 7.5rem) 0;
+      border-top: 1px solid var(--rule);
+    }
+
+    section:first-of-type { border-top: 0; padding-top: 0; }
+
+    .eyebrow {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 clamp(1.75rem, 3vw, 2.5rem);
+    }
+
+    h1, h2 {
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6.2vw, 4.25rem);
+      max-width: 14ch;
+    }
+
+    h2 {
+      font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      max-width: 24ch;
+    }
+
+    p {
+      margin: 0;
+      max-width: 58ch;
+    }
+
+    .lede {
+      margin-top: clamp(1.5rem, 2.5vw, 2rem);
+      font-size: 1.0625rem;
+      color: var(--muted);
+      max-width: 46ch;
+      line-height: 1.55;
+    }
+
+    .body {
+      margin-top: clamp(1.25rem, 2vw, 1.5rem);
+      font-size: 1.0625rem;
+      line-height: 1.65;
+    }
+
+    .body + .body {
+      margin-top: 1.25rem;
+    }
+
+    /* Hero CTA */
+    .cta-row {
+      margin-top: clamp(2.25rem, 4vw, 3rem);
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--ink);
+      border-bottom: 1px solid var(--ink);
+      padding: 0 0 2px;
+      transition: gap 200ms ease, opacity 200ms ease;
+    }
+
+    .cta .arrow {
+      display: inline-block;
+      transition: transform 220ms ease;
+    }
+
+    .cta:hover { gap: 0.9rem; }
+    .cta:hover .arrow { transform: translateX(2px); }
+
+    /* Statement */
+    .statement h2 {
+      font-size: clamp(1.75rem, 4.2vw, 2.75rem);
+      max-width: 22ch;
+      letter-spacing: -0.028em;
+      line-height: 1.15;
+    }
+
+    /* Proof */
+    .proof blockquote {
+      margin: 0;
+      padding: 0;
+      font-size: 1.125rem;
+      line-height: 1.6;
+      max-width: 54ch;
+    }
+
+    .proof .attrib {
+      margin-top: 1.5rem;
+      font-size: 0.875rem;
+      color: var(--muted);
+      letter-spacing: 0.01em;
+    }
+
+    /* Closing CTA */
+    .closing h2 {
+      max-width: 22ch;
+    }
+
+    .closing .meta {
+      margin-top: clamp(1.5rem, 2.5vw, 2rem);
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    .closing .cta-row {
+      margin-top: clamp(2rem, 3.5vw, 2.75rem);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: clamp(5rem, 10vw, 8rem);
+      padding-top: 2rem;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 0.875rem;
+      color: var(--muted);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer a:hover { color: var(--ink); }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+
+    /* Small screens */
+    @media (max-width: 520px) {
+      body { font-size: 17px; }
+      header { padding-bottom: 5rem; }
+      .cta-row { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <header>
+      <a href="/" class="mark" aria-label="Avera, home">Avera</a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+
+      <!-- HERO -->
+      <section class="hero" aria-labelledby="hero-title">
+        <h1 id="hero-title">Remove friction.<br />Build clarity.</h1>
+        <p class="lede">
+          We help organizations create structure, reduce unnecessary work, and move forward with confidence.
+        </p>
+        <div class="cta-row">
+          <a class="cta" href="#contact">
+            <span>Get in touch</span>
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- STATEMENT -->
+      <section class="statement" aria-label="Perspective">
+        <p class="eyebrow">A perspective</p>
+        <h2>
+          Most organizations do not have a technology problem.
+          They have a clarity problem.
+        </h2>
+      </section>
+
+      <!-- WHAT WE DO -->
+      <section class="what" aria-labelledby="what-title">
+        <p class="eyebrow">What we do</p>
+        <h2 id="what-title">We think with leadership teams, and we build what is useful.</h2>
+        <p class="body">
+          Most of the work begins with listening. We look honestly at how a team operates today &mdash; where decisions stall, where effort is duplicated, where ownership has quietly drifted &mdash; and then we name what we find, plainly.
+        </p>
+        <p class="body">
+          From there, we help teams simplify. Sometimes that means rewriting a process so it fits the people doing it. Sometimes it means designing a small, practical system that removes a recurring friction. We do only what is needed, and no more than that.
+        </p>
+      </section>
+
+      <!-- TRUST / OUTCOME -->
+      <section class="outcome" aria-labelledby="outcome-title">
+        <p class="eyebrow">What changes</p>
+        <h2 id="outcome-title">The change is quieter than it sounds.</h2>
+        <p class="body">
+          Less confusion in the room. Fewer questions asked twice. A shared sense of what is happening and what comes next. The work itself does not become dramatic. It becomes calmer, and easier to do well. That, in our experience, is what lets good organizations keep moving forward.
+        </p>
+      </section>
+
+      <!-- PROOF -->
+      <section class="proof" aria-labelledby="proof-title">
+        <p class="eyebrow">An example</p>
+        <h2 id="proof-title" class="visually-hidden" style="position:absolute;left:-9999px;">An example</h2>
+        <blockquote>
+          A leadership team of about forty had lost track of who owned what. We spent a few weeks listening, then mapped the work as it actually was. By the end, no one was repeating the same question in three meetings. The tools had not changed. The clarity had.
+        </blockquote>
+        <p class="attrib">&mdash; A recent engagement</p>
+      </section>
+
+      <!-- CLOSING CTA -->
+      <section class="closing" id="contact" aria-labelledby="closing-title">
+        <p class="eyebrow">Start here</p>
+        <h2 id="closing-title">Let us create clarity in your organization.</h2>
+        <p class="meta">
+          A short conversation is usually the best place to begin.
+        </p>
+        <div class="cta-row">
+          <a class="cta" href="mailto:hello@avera.co">
+            <span>hello@avera.co</span>
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <span>&copy; Avera</span>
+      <span>Considered work, quietly done.</span>
+    </footer>
+
+  </div>
+</body>
+</html>
