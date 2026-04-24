@@ -5,33 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Avera — Remove friction. Build clarity.</title>
   <meta name="description" content="Avera helps leadership teams fix messy operations, unclear ownership, and repetitive work." />
-
   <link rel="preconnect" href="https://rsms.me/" />
   <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-
   <style>
     :root {
-      --bg: #faf9f6;
-      --ink: #1a1a1a;
-      --muted: #6b6b66;
-      --rule: #e6e4dd;
-      --surface: #edeae2;
-      --max: 700px;
-      --gutter: clamp(1.5rem, 4vw, 2rem);
+      --gutter: clamp(1.5rem, 5vw, 3rem);
+      --container: 900px;
     }
 
     @supports (font-variation-settings: normal) {
-      html { font-family: 'Inter var', Inter, system-ui, -apple-system, 'Segoe UI', sans-serif; }
+      html { font-family: 'Inter var', Inter, system-ui, -apple-system, sans-serif; }
     }
 
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     html, body {
       margin: 0;
       padding: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-family: Inter, system-ui, -apple-system, sans-serif;
       font-feature-settings: "ss01", "cv11";
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -44,65 +36,34 @@
       letter-spacing: -0.005em;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
 
-    .page {
-      max-width: var(--max);
+    /* =====================
+       LAYOUT
+    ===================== */
+    .container {
+      max-width: var(--container);
       margin: 0 auto;
-      padding: clamp(1.75rem, 4vw, 2.5rem) var(--gutter) clamp(4rem, 8vw, 6rem);
+      padding: 0 var(--gutter);
+      width: 100%;
     }
 
-    /* Header */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding-top: 0.25rem;
-      padding-bottom: clamp(6rem, 14vw, 10rem);
-    }
-
-    .mark {
-      font-weight: 500;
-      letter-spacing: -0.01em;
-      font-size: 1rem;
-    }
-
-    .nav {
-      font-size: 0.9375rem;
-      color: var(--muted);
-      letter-spacing: -0.005em;
-    }
-
-    .nav a {
-      border-bottom: 1px solid transparent;
-      transition: border-color 180ms ease, color 180ms ease;
-    }
-
-    .nav a:hover {
-      color: var(--ink);
-      border-bottom-color: var(--ink);
-    }
-
-    /* Sections */
+    /* All sections: full-screen, dark by default */
     section {
-      padding: clamp(4.5rem, 10vw, 7.5rem) 0;
-      border-top: 1px solid var(--rule);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(5rem, 10vh, 8rem) 0;
+      background: #0d0c0a;
+      --fg: #ede8df;
+      --fg-muted: rgba(237, 232, 223, 0.42);
+      color: var(--fg);
     }
 
-    section:first-of-type { border-top: 0; padding-top: 0; }
-
-    .eyebrow {
-      font-size: 0.8125rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin: 0 0 clamp(1.75rem, 3vw, 2.5rem);
-    }
-
+    /* =====================
+       TYPOGRAPHY
+    ===================== */
     h1, h2 {
       font-weight: 500;
       letter-spacing: -0.03em;
@@ -110,80 +71,100 @@
       margin: 0;
     }
 
-    .hero-line { display: block; }
-
-    h1 {
-      font-size: clamp(2.5rem, 6.2vw, 4.25rem);
-      max-width: 14ch;
-    }
+    h1 { font-size: clamp(3rem, 8vw, 6.5rem); }
 
     h2 {
-      font-size: clamp(1.75rem, 3.6vw, 2.5rem);
-      letter-spacing: -0.025em;
-      line-height: 1.15;
-      max-width: 24ch;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      letter-spacing: -0.028em;
+      line-height: 1.1;
+      max-width: 22ch;
     }
 
-    p {
-      margin: 0;
-      max-width: 58ch;
+    p { margin: 0; max-width: 58ch; }
+
+    .eyebrow {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      margin: 0 0 clamp(2rem, 4vw, 3rem);
     }
 
     .lede {
-      margin-top: clamp(1.5rem, 2.5vw, 2rem);
-      font-size: 1.0625rem;
-      color: var(--muted);
-      max-width: 48ch;
+      margin-top: clamp(1.5rem, 3vw, 2.5rem);
+      font-size: clamp(1.0625rem, 2vw, 1.25rem);
+      color: var(--fg-muted);
+      max-width: 46ch;
       line-height: 1.55;
     }
 
     .body {
-      margin-top: clamp(1.25rem, 2vw, 1.5rem);
+      margin-top: clamp(1.25rem, 2vw, 1.75rem);
       font-size: 1.0625rem;
-      line-height: 1.65;
+      line-height: 1.7;
     }
 
-    .body + .body { margin-top: 1.25rem; }
-
-    /* Bullet list */
-    .list {
-      list-style: none;
-      margin: clamp(1.5rem, 2.5vw, 2rem) 0 0;
+    /* =====================
+       HERO
+    ===================== */
+    .hero {
+      background: #0d0c0a;
       padding: 0;
+      justify-content: flex-start;
     }
 
-    .list li {
-      position: relative;
-      padding-left: 1.375rem;
-      font-size: 1.0625rem;
-      line-height: 1.5;
-    }
-
-    .list li + li { margin-top: 0.625rem; }
-
-    .list li::before {
-      content: '—';
-      position: absolute;
-      left: 0;
-      color: var(--muted);
-    }
-
-    /* CTA */
-    .cta-row {
-      margin-top: clamp(2.25rem, 4vw, 3rem);
+    .site-header {
+      flex-shrink: 0;
       display: flex;
-      align-items: center;
-      gap: 1.5rem;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: clamp(1.5rem, 3vw, 2rem) var(--gutter);
     }
+
+    .mark {
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      font-size: 0.9375rem;
+    }
+
+    .nav a {
+      font-size: 0.9375rem;
+      color: var(--fg-muted);
+      border-bottom: 1px solid transparent;
+      transition: color 200ms ease, border-color 200ms ease;
+    }
+
+    .nav a:hover {
+      color: var(--fg);
+      border-bottom-color: currentColor;
+    }
+
+    .hero-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 var(--gutter) clamp(5rem, 10vh, 8rem);
+      max-width: calc(var(--container) + 2 * var(--gutter));
+      width: 100%;
+    }
+
+    .hero-line { display: block; }
+
+    /* =====================
+       CTA
+    ===================== */
+    .cta-row { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
 
     .cta {
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.625rem;
       font-size: 1rem;
       font-weight: 500;
-      color: var(--ink);
-      border-bottom: 1px solid var(--ink);
+      color: inherit;
+      border-bottom: 1px solid currentColor;
       padding: 0 0 2px;
       transition: gap 200ms ease;
     }
@@ -193,64 +174,143 @@
       transition: transform 220ms ease;
     }
 
-    .cta:hover { gap: 0.9rem; }
-    .cta:hover .arrow { transform: translateX(2px); }
+    .cta:hover { gap: 0.95rem; }
+    .cta:hover .arrow { transform: translateX(3px); }
 
-    /* Problem section */
+    /* =====================
+       PROBLEM — dark warm brown
+    ===================== */
+    .problem { background: #121008; }
+
     .problem h2 {
-      font-size: clamp(2rem, 4.5vw, 3rem);
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-      max-width: 18ch;
+      font-size: clamp(2.25rem, 5.5vw, 3.75rem);
+      max-width: 20ch;
+    }
+
+    .break-list {
+      list-style: none;
+      margin: clamp(2.5rem, 5vw, 4rem) 0;
+      padding: 0;
+    }
+
+    .break-list li {
+      font-size: clamp(1.25rem, 3vw, 1.875rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      padding: clamp(0.875rem, 2vh, 1.25rem) 0;
+      border-bottom: 1px solid rgba(237, 232, 223, 0.08);
+      color: var(--fg);
+    }
+
+    .break-list li:first-child {
+      border-top: 1px solid rgba(237, 232, 223, 0.08);
     }
 
     .problem-close {
-      margin-top: clamp(2rem, 3.5vw, 2.75rem);
-      font-size: 1.125rem;
+      font-size: clamp(1.125rem, 2.5vw, 1.5rem);
       font-weight: 500;
-      line-height: 1.5;
-      letter-spacing: -0.015em;
-      max-width: 38ch;
+      letter-spacing: -0.02em;
+      line-height: 1.45;
+      max-width: 34ch;
+      color: var(--fg);
     }
 
-    /* What we do — closing lines */
-    .what .closing-lines {
-      margin-top: clamp(1.5rem, 2.5vw, 2rem);
+    /* =====================
+       WHAT WE DO — warm cream
+    ===================== */
+    .what {
+      background: #f5f0e8;
+      --fg: #1a1a1a;
+      --fg-muted: rgba(26, 26, 26, 0.5);
+    }
+
+    .what h2 { font-size: clamp(2rem, 4.5vw, 3rem); }
+
+    .dot-list {
+      list-style: none;
+      margin: clamp(1.5rem, 3vw, 2.25rem) 0 0;
+      padding: 0;
+    }
+
+    .dot-list li {
+      position: relative;
+      padding-left: 1.375rem;
       font-size: 1.0625rem;
-      line-height: 1.8;
-      color: var(--muted);
-      max-width: 52ch;
+      line-height: 1.55;
+      color: var(--fg);
     }
 
-    /* Proof */
+    .dot-list li + li { margin-top: 0.625rem; }
+
+    .dot-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--fg-muted);
+    }
+
+    .what .closing-lines {
+      margin-top: clamp(2rem, 4vw, 3rem);
+      font-size: 1.0625rem;
+      line-height: 2;
+      color: var(--fg-muted);
+      max-width: 50ch;
+    }
+
+    /* =====================
+       OUTCOMES — dark warm
+    ===================== */
+    .outcome { background: #1a1714; }
+
+    .outcome .dot-list { margin-top: clamp(2rem, 4vw, 3rem); }
+
+    .outcome .dot-list li {
+      font-size: clamp(1.0625rem, 2vw, 1.25rem);
+      padding: 0.5rem 0 0.5rem 1.375rem;
+    }
+
+    .outcome .body {
+      margin-top: clamp(2rem, 4vw, 3rem);
+      font-size: 1.0625rem;
+      color: var(--fg-muted);
+      font-style: italic;
+    }
+
+    /* =====================
+       PROOF — deepest dark
+    ===================== */
+    .proof { background: #0a0908; }
+
     .proof blockquote {
       margin: 0;
-      padding: 0 0 0 clamp(1.25rem, 3vw, 2rem);
-      border-left: 2px solid var(--ink);
-      font-size: 1.1rem;
+      padding: 0 0 0 clamp(1.5rem, 3vw, 2.5rem);
+      border-left: 1px solid rgba(237, 232, 223, 0.2);
+      font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+      font-weight: 400;
+      letter-spacing: -0.015em;
       line-height: 1.65;
-      max-width: 52ch;
+      max-width: 50ch;
     }
 
     .proof blockquote p { margin: 0; }
-    .proof blockquote p + p { margin-top: 1rem; }
+    .proof blockquote p + p { margin-top: 1.25em; }
 
     .proof .attrib {
-      margin-top: 1.5rem;
-      padding-left: clamp(1.25rem, 3vw, 2rem);
+      margin-top: 2.25rem;
+      padding-left: clamp(1.5rem, 3vw, 2.5rem);
       font-size: 0.875rem;
-      color: var(--muted);
+      color: var(--fg-muted);
       letter-spacing: 0.01em;
     }
 
-    /* Closing CTA */
+    /* =====================
+       CLOSING CTA — warm sand
+    ===================== */
     .closing {
-      background: var(--surface);
-      border-top: none;
-      margin-left: calc(-1 * var(--gutter));
-      margin-right: calc(-1 * var(--gutter));
-      padding-left: var(--gutter);
-      padding-right: var(--gutter);
+      background: #c9a882;
+      --fg: #1a1a1a;
+      --fg-muted: rgba(26, 26, 26, 0.5);
     }
 
     .closing h2 { max-width: 26ch; }
@@ -258,28 +318,30 @@
     .closing .meta {
       margin-top: clamp(1.5rem, 2.5vw, 2rem);
       font-size: 1rem;
-      color: var(--muted);
-      max-width: 46ch;
+      color: var(--fg-muted);
+      max-width: 44ch;
     }
 
-    .closing .cta-row { margin-top: clamp(2rem, 3.5vw, 2.75rem); }
+    .closing .cta-row { margin-top: clamp(2.25rem, 4vw, 3rem); }
 
-    /* Footer */
+    /* =====================
+       FOOTER
+    ===================== */
     footer {
-      margin-top: clamp(5rem, 10vw, 8rem);
-      padding-top: 2rem;
-      border-top: 1px solid var(--rule);
+      background: #080807;
+      padding: clamp(2rem, 4vw, 2.75rem) var(--gutter);
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       font-size: 0.875rem;
-      color: var(--muted);
+      color: rgba(237, 232, 223, 0.25);
       flex-wrap: wrap;
       gap: 1rem;
     }
 
-    footer a:hover { color: var(--ink); }
-
+    /* =====================
+       ACCESSIBILITY
+    ===================== */
     .visually-hidden {
       position: absolute;
       left: -9999px;
@@ -288,25 +350,27 @@
       overflow: hidden;
     }
 
-    /* Motion */
+    /* =====================
+       MOTION
+    ===================== */
     @keyframes rise {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(22px); }
       to   { opacity: 1; transform: none; }
     }
 
     @media (prefers-reduced-motion: no-preference) {
       .hero-line {
         opacity: 0;
-        animation: rise 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        animation: rise 900ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
       }
-      .hero-line:nth-child(2)  { animation-delay: 120ms; }
-      .hero .lede              { opacity: 0; animation: rise 700ms cubic-bezier(0.22, 1, 0.36, 1) 260ms forwards; }
-      .hero .cta-row           { opacity: 0; animation: rise 700ms cubic-bezier(0.22, 1, 0.36, 1) 400ms forwards; }
+      .hero-line:nth-child(2) { animation-delay: 150ms; }
+      .hero .lede    { opacity: 0; animation: rise 900ms cubic-bezier(0.22, 1, 0.36, 1) 320ms forwards; }
+      .hero .cta-row { opacity: 0; animation: rise 900ms cubic-bezier(0.22, 1, 0.36, 1) 480ms forwards; }
 
       [data-reveal] {
         opacity: 0;
-        transform: translateY(24px);
-        transition: opacity 600ms ease, transform 600ms ease;
+        transform: translateY(28px);
+        transition: opacity 700ms ease, transform 700ms ease;
       }
       [data-reveal].in-view { opacity: 1; transform: none; }
     }
@@ -315,28 +379,28 @@
       * { transition: none !important; animation: none !important; }
     }
 
-    /* Small screens */
-    @media (max-width: 520px) {
+    /* =====================
+       RESPONSIVE
+    ===================== */
+    @media (max-width: 640px) {
       body { font-size: 17px; }
-      header { padding-bottom: 5rem; }
-      .cta-row { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .break-list li { font-size: clamp(1.125rem, 6vw, 1.5rem); }
     }
   </style>
 </head>
 <body>
-  <div class="page">
 
-    <header>
-      <a href="/" class="mark" aria-label="Avera, home">Avera</a>
-      <nav class="nav" aria-label="Primary">
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
+  <main>
 
-    <main>
-
-      <!-- HERO -->
-      <section class="hero" aria-labelledby="hero-title">
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <header class="site-header">
+        <a href="/" class="mark" aria-label="Avera, home">Avera</a>
+        <nav class="nav" aria-label="Primary">
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
+      <div class="hero-content">
         <h1 id="hero-title">
           <span class="hero-line">Remove friction.</span>
           <span class="hero-line">Build clarity.</span>
@@ -350,12 +414,14 @@
             <span class="arrow" aria-hidden="true">&rarr;</span>
           </a>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- PROBLEM -->
-      <section class="problem" aria-labelledby="problem-title">
+    <!-- PROBLEM -->
+    <section class="problem" aria-labelledby="problem-title">
+      <div class="container">
         <h2 id="problem-title" data-reveal>Where things break</h2>
-        <ul class="list" data-reveal>
+        <ul class="break-list" data-reveal>
           <li>Work gets repeated</li>
           <li>Decisions stall</li>
           <li>No one owns what</li>
@@ -365,14 +431,16 @@
           That is not a technology problem.<br />
           It is a clarity problem.
         </p>
-      </section>
+      </div>
+    </section>
 
-      <!-- WHAT WE DO -->
-      <section class="what" aria-labelledby="what-title">
+    <!-- WHAT WE DO -->
+    <section class="what" aria-labelledby="what-title">
+      <div class="container">
         <p class="eyebrow" data-reveal>What we do</p>
         <h2 id="what-title" data-reveal>What we actually do</h2>
         <p class="body" data-reveal>We work directly with leadership teams to:</p>
-        <ul class="list" data-reveal>
+        <ul class="dot-list" data-reveal>
           <li>clarify ownership and decision-making</li>
           <li>simplify how work flows across teams</li>
           <li>remove recurring friction in daily operations</li>
@@ -382,23 +450,27 @@
           Sometimes it means building a small internal tool.<br />
           Always, it means making things easier to run.
         </p>
-      </section>
+      </div>
+    </section>
 
-      <!-- OUTCOMES -->
-      <section class="outcome" aria-labelledby="outcome-title">
+    <!-- OUTCOMES -->
+    <section class="outcome" aria-labelledby="outcome-title">
+      <div class="container">
         <p class="eyebrow" data-reveal>What changes</p>
         <h2 id="outcome-title" data-reveal>The change is quieter than it sounds.</h2>
-        <ul class="list" data-reveal>
+        <ul class="dot-list" data-reveal>
           <li>Fewer repeated questions</li>
           <li>Clear ownership</li>
           <li>Faster decisions</li>
           <li>Less admin</li>
         </ul>
         <p class="body" data-reveal>The work does not become louder. It becomes easier to do well.</p>
-      </section>
+      </div>
+    </section>
 
-      <!-- PROOF -->
-      <section class="proof" aria-labelledby="proof-title">
+    <!-- PROOF -->
+    <section class="proof" aria-labelledby="proof-title">
+      <div class="container">
         <p class="eyebrow" data-reveal>An example</p>
         <h2 id="proof-title" class="visually-hidden">An example</h2>
         <blockquote data-reveal>
@@ -407,10 +479,12 @@
           <p>No new tools. The repeated questions stopped.</p>
         </blockquote>
         <p class="attrib" data-reveal>&mdash; A recent engagement</p>
-      </section>
+      </div>
+    </section>
 
-      <!-- CLOSING CTA -->
-      <section class="closing" id="contact" aria-labelledby="closing-title">
+    <!-- CLOSING CTA -->
+    <section class="closing" id="contact" aria-labelledby="closing-title">
+      <div class="container">
         <p class="eyebrow" data-reveal>Start here</p>
         <h2 id="closing-title" data-reveal>Let us fix what is slowing you down.</h2>
         <p class="meta" data-reveal>
@@ -422,16 +496,15 @@
             <span class="arrow" aria-hidden="true">&rarr;</span>
           </a>
         </div>
-      </section>
+      </div>
+    </section>
 
-    </main>
+  </main>
 
-    <footer>
-      <span>&copy; Avera</span>
-      <span>Considered work, quietly done.</span>
-    </footer>
-
-  </div>
+  <footer>
+    <span>&copy; Avera</span>
+    <span>Considered work, quietly done.</span>
+  </footer>
 
   <script>
     (function () {
@@ -440,7 +513,7 @@
       document.querySelectorAll('section:not(.hero)').forEach(function (section) {
         var children = section.querySelectorAll('[data-reveal]');
         children.forEach(function (el, i) {
-          el.style.transitionDelay = (i * 80) + 'ms';
+          el.style.transitionDelay = (i * 90) + 'ms';
         });
 
         var observer = new IntersectionObserver(function (entries) {
@@ -450,11 +523,12 @@
               observer.disconnect();
             }
           });
-        }, { threshold: 0.12 });
+        }, { threshold: 0.1 });
 
         observer.observe(section);
       });
     }());
   </script>
+
 </body>
 </html>
