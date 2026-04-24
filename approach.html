@@ -19,11 +19,11 @@
             <clipPath id="lc-in"><rect width="96" height="110"/></clipPath>
             <clipPath id="lc-out"><rect x="96" width="62" height="110"/></clipPath>
           </defs>
-          <rect width="96" height="110" fill="#1a1a1a"/>
-          <rect x="13" y="79" width="13" height="13" fill="#faf9f6"/>
-          <path fill-rule="evenodd" fill="#faf9f6" clip-path="url(#lc-in)"
+          <rect width="96" height="110" fill="#ede8df"/>
+          <rect x="13" y="79" width="13" height="13" fill="#0d0c0a"/>
+          <path fill-rule="evenodd" fill="#0d0c0a" clip-path="url(#lc-in)"
             d="M80 7 L134 103 L112 103 L97 63 L61 63 L42 103 L20 103 Z M80 13 L94 51 L64 51 Z"/>
-          <path fill-rule="evenodd" fill="#1a1a1a" clip-path="url(#lc-out)"
+          <path fill-rule="evenodd" fill="#ede8df" clip-path="url(#lc-out)"
             d="M80 7 L134 103 L112 103 L97 63 L61 63 L42 103 L20 103 Z M80 13 L94 51 L64 51 Z"/>
         </svg>
         <span class="logo-name">Avera</span>
@@ -36,7 +36,7 @@
       </nav>
     </header>
 
-    <main>
+    <main class="inner-main">
 
       <section aria-labelledby="page-title">
         <p class="eyebrow">Our approach</p>
@@ -44,51 +44,51 @@
         <p class="lede">We start with how the work actually happens.</p>
       </section>
 
-      <section aria-label="The problem">
-        <p class="eyebrow">What we usually find</p>
-        <h2>Most problems are not technical.</h2>
-        <p class="body">
+      <section aria-label="What we usually find">
+        <p class="eyebrow" data-reveal>What we usually find</p>
+        <h2 data-reveal>Most problems are not technical.</h2>
+        <p class="body" data-reveal>
           They come from unclear ownership, duplicated effort, and decisions that
           do not move. The same questions get asked in three different meetings.
           Work gets done twice because no one knew someone else was doing it.
           A decision that should take a day takes three weeks.
         </p>
-        <p class="body">
+        <p class="body" data-reveal>
           These are clarity problems. Adding a new tool or a new process layer
-          rarely fixes them — it usually adds one more thing to navigate.
+          rarely fixes them &mdash; it usually adds one more thing to navigate.
         </p>
       </section>
 
       <section aria-label="How we work">
-        <p class="eyebrow">How we work</p>
-        <h2>We look at what is really happening, and we name it plainly.</h2>
-        <p class="body">
-          We start by listening — to the people doing the work, not just the
+        <p class="eyebrow" data-reveal>How we work</p>
+        <h2 data-reveal>We look at what is really happening, and we name it plainly.</h2>
+        <p class="body" data-reveal>
+          We start by listening &mdash; to the people doing the work, not just the
           people managing it. We look at where decisions stall, where effort is
           repeated, and where ownership has quietly drifted. Then we describe
           what we find, clearly, without softening it.
         </p>
-        <p class="body">
+        <p class="body" data-reveal>
           From there, we simplify. Sometimes that means rewriting a process so it
           fits the people doing it. Sometimes it means designing a small, practical
           system that removes a recurring friction point. We build only what is needed.
         </p>
       </section>
 
-      <section aria-label="Principles">
-        <p class="eyebrow">In practice</p>
+      <section aria-label="In practice">
+        <p class="eyebrow" data-reveal>In practice</p>
         <ul class="principle-list">
-          <li>We listen before we recommend</li>
-          <li>We describe what we find, without softening it</li>
-          <li>We simplify before we build</li>
-          <li>We build only what the situation actually needs</li>
-          <li>We do not leave behind frameworks that require maintenance</li>
+          <li data-reveal>We listen before we recommend</li>
+          <li data-reveal>We describe what we find, without softening it</li>
+          <li data-reveal>We simplify before we build</li>
+          <li data-reveal>We build only what the situation actually needs</li>
+          <li data-reveal>We do not leave behind frameworks that require maintenance</li>
         </ul>
       </section>
 
       <section aria-label="Get in touch">
-        <h2>A short conversation is usually the best place to start.</h2>
-        <div class="cta-row">
+        <h2 data-reveal>A short conversation is usually the best place to start.</h2>
+        <div class="cta-row" data-reveal>
           <a class="cta" href="contact.html">Get in touch &rarr;</a>
           <a class="cta-secondary" href="work.html">See our work</a>
         </div>
@@ -102,5 +102,26 @@
     </footer>
 
   </div>
+
+  <script>
+    (function () {
+      if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+      document.querySelectorAll('section').forEach(function (section) {
+        var children = section.querySelectorAll('[data-reveal]');
+        if (!children.length) return;
+        children.forEach(function (el, i) {
+          el.style.transitionDelay = (i * 80) + 'ms';
+        });
+        var observer = new IntersectionObserver(function (entries) {
+          if (entries[0].isIntersecting) {
+            children.forEach(function (el) { el.classList.add('in-view'); });
+            observer.disconnect();
+          }
+        }, { threshold: 0.1 });
+        observer.observe(section);
+      });
+    }());
+  </script>
+
 </body>
 </html>

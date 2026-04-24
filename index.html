@@ -8,72 +8,183 @@
   <link rel="preconnect" href="https://rsms.me/" />
   <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Full-screen section layout for home */
+    section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(5rem, 10vh, 8rem) 0;
+    }
+
+    /* Hero */
+    .hero {
+      background: #0d0c0a;
+      padding: 0;
+      justify-content: flex-start;
+    }
+
+    .hero .site-header {
+      flex-shrink: 0;
+      padding: clamp(1.5rem, 3vw, 2rem) var(--gutter);
+      border-bottom: none;
+    }
+
+    .hero-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 var(--gutter) clamp(5rem, 10vh, 8rem);
+      max-width: calc(var(--container) + 2 * var(--gutter));
+    }
+
+    .hero-line { display: block; }
+
+    /* Section colour palette */
+    .statement { background: #121008; }
+    .proof     { background: #0a0908; }
+
+    .closing {
+      background: #c9a882;
+      --fg: #1a1a1a;
+      --fg-muted: rgba(26, 26, 26, 0.55);
+      color: var(--fg);
+    }
+
+    /* Home footer needs its own horizontal padding */
+    footer {
+      padding-left: var(--gutter);
+      padding-right: var(--gutter);
+    }
+
+    /* Hero entrance animations */
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-line {
+        opacity: 0;
+        animation: rise 900ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+      .hero-line:nth-child(2) { animation-delay: 150ms; }
+      .hero .lede    { opacity: 0; animation: rise 900ms cubic-bezier(0.22, 1, 0.36, 1) 320ms forwards; }
+      .hero .cta-row { opacity: 0; animation: rise 900ms cubic-bezier(0.22, 1, 0.36, 1) 480ms forwards; }
+    }
+  </style>
 </head>
 <body>
-  <div class="page">
 
-    <header class="site-header">
-      <a href="/" class="mark" aria-label="Avera, home">
-        <svg class="logo-mark" viewBox="0 0 158 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs>
-            <clipPath id="lc-in"><rect width="96" height="110"/></clipPath>
-            <clipPath id="lc-out"><rect x="96" width="62" height="110"/></clipPath>
-          </defs>
-          <rect width="96" height="110" fill="#1a1a1a"/>
-          <rect x="13" y="79" width="13" height="13" fill="#faf9f6"/>
-          <path fill-rule="evenodd" fill="#faf9f6" clip-path="url(#lc-in)"
-            d="M80 7 L134 103 L112 103 L97 63 L61 63 L42 103 L20 103 Z M80 13 L94 51 L64 51 Z"/>
-          <path fill-rule="evenodd" fill="#1a1a1a" clip-path="url(#lc-out)"
-            d="M80 7 L134 103 L112 103 L97 63 L61 63 L42 103 L20 103 Z M80 13 L94 51 L64 51 Z"/>
-        </svg>
-        <span class="logo-name">Avera</span>
-      </a>
-      <nav class="nav" aria-label="Primary">
-        <a href="/" class="active">Home</a>
-        <a href="approach.html">Our approach</a>
-        <a href="work.html">Work</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-    </header>
+  <main>
 
-    <main>
-
-      <section class="hero" aria-labelledby="hero-title">
-        <h1 id="hero-title">Remove friction.<br />Build clarity.</h1>
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <header class="site-header">
+        <a href="/" class="mark" aria-label="Avera, home">
+          <svg class="logo-mark" viewBox="0 0 158 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <clipPath id="lc-in"><rect width="96" height="110"/></clipPath>
+              <clipPath id="lc-out"><rect x="96" width="62" height="110"/></clipPath>
+            </defs>
+            <rect width="96" height="110" fill="#ede8df"/>
+            <rect x="13" y="79" width="13" height="13" fill="#0d0c0a"/>
+            <path fill-rule="evenodd" fill="#0d0c0a" clip-path="url(#lc-in)"
+              d="M80 7 L134 103 L112 103 L97 63 L61 63 L42 103 L20 103 Z M80 13 L94 51 L64 51 Z"/>
+            <path fill-rule="evenodd" fill="#ede8df" clip-path="url(#lc-out)"
+              d="M80 7 L134 103 L112 103 L97 63 L61 63 L42 103 L20 103 Z M80 13 L94 51 L64 51 Z"/>
+          </svg>
+          <span class="logo-name">Avera</span>
+        </a>
+        <nav class="nav" aria-label="Primary">
+          <a href="/" class="active">Home</a>
+          <a href="approach.html">Our approach</a>
+          <a href="work.html">Work</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </header>
+      <div class="hero-content">
+        <h1 id="hero-title">
+          <span class="hero-line">Remove friction.</span>
+          <span class="hero-line">Build clarity.</span>
+        </h1>
         <p class="lede">
-          We help leadership teams fix unclear ownership, slow decisions, and operational friction — so work actually moves forward.
+          We help leadership teams fix unclear ownership, slow decisions, and operational friction &mdash; so work actually moves forward.
         </p>
         <div class="cta-row">
           <a class="cta" href="approach.html">See our approach &rarr;</a>
           <a class="cta-secondary" href="contact.html">Get in touch</a>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section aria-label="What we do">
-        <p class="eyebrow">What we do</p>
-        <p>Most organizations do not have a technology problem. They have a clarity problem. Decisions stall, work gets repeated, and no one is quite sure who owns what.</p>
-        <p class="body">We work directly with leadership teams to name what is in the way and simplify it — without adding more process, more tools, or more complexity than the situation needs.</p>
-      </section>
+    <!-- STATEMENT -->
+    <section class="statement" aria-label="What we do">
+      <div class="container">
+        <p class="eyebrow" data-reveal>What we do</p>
+        <h2 data-reveal>Most organizations do not have a technology problem. They have a clarity problem.</h2>
+        <p class="body" data-reveal>Decisions stall. Work gets repeated. No one is quite sure who owns what. We work directly with leadership teams to name what is in the way and simplify it &mdash; without adding complexity.</p>
+        <div class="cta-row" data-reveal>
+          <a class="cta" href="approach.html">Our approach &rarr;</a>
+        </div>
+      </div>
+    </section>
 
-      <section aria-label="An example">
-        <p class="eyebrow">An example</p>
-        <blockquote>
+    <!-- PROOF -->
+    <section class="proof" aria-label="An example">
+      <div class="container">
+        <p class="eyebrow" data-reveal>An example</p>
+        <blockquote data-reveal>
           <p>A forty-person leadership team had lost track of who owned what. The same questions surfaced in every meeting. We spent three weeks listening, mapped how work actually moved, and named what needed to change.</p>
           <p>No new tools. The repeated questions stopped.</p>
         </blockquote>
-        <p class="attrib">&mdash; A recent engagement</p>
-        <div class="cta-row">
+        <p class="attrib" data-reveal>&mdash; A recent engagement</p>
+        <div class="cta-row" data-reveal>
           <a class="cta" href="work.html">More examples &rarr;</a>
         </div>
-      </section>
+      </div>
+    </section>
 
-    </main>
+    <!-- CLOSING -->
+    <section class="closing" id="contact" aria-label="Get in touch">
+      <div class="container">
+        <p class="eyebrow" data-reveal>Start here</p>
+        <h2 data-reveal>Let us fix what is slowing you down.</h2>
+        <p class="lede" data-reveal>A short conversation is usually enough to see if this is useful.</p>
+        <div class="cta-row" data-reveal>
+          <a class="cta" href="contact.html">Get in touch &rarr;</a>
+        </div>
+      </div>
+    </section>
 
-    <footer>
-      <span>&copy; Avera</span>
-      <span>Considered work, quietly done.</span>
-    </footer>
+  </main>
 
-  </div>
+  <footer>
+    <span>&copy; Avera</span>
+    <span>Considered work, quietly done.</span>
+  </footer>
+
+  <script>
+    (function () {
+      if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+      document.querySelectorAll('section:not(.hero)').forEach(function (section) {
+        var children = section.querySelectorAll('[data-reveal]');
+        if (!children.length) return;
+        children.forEach(function (el, i) {
+          el.style.transitionDelay = (i * 100) + 'ms';
+        });
+        var observer = new IntersectionObserver(function (entries) {
+          if (entries[0].isIntersecting) {
+            children.forEach(function (el) { el.classList.add('in-view'); });
+            observer.disconnect();
+          }
+        }, { threshold: 0.15 });
+        observer.observe(section);
+      });
+    }());
+  </script>
+
 </body>
 </html>

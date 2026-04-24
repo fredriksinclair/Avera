@@ -19,11 +19,11 @@
             <clipPath id="lc-in"><rect width="96" height="110"/></clipPath>
             <clipPath id="lc-out"><rect x="96" width="62" height="110"/></clipPath>
           </defs>
-          <rect width="96" height="110" fill="#1a1a1a"/>
-          <rect x="13" y="79" width="13" height="13" fill="#faf9f6"/>
-          <path fill-rule="evenodd" fill="#faf9f6" clip-path="url(#lc-in)"
+          <rect width="96" height="110" fill="#ede8df"/>
+          <rect x="13" y="79" width="13" height="13" fill="#0d0c0a"/>
+          <path fill-rule="evenodd" fill="#0d0c0a" clip-path="url(#lc-in)"
             d="M80 7 L134 103 L112 103 L97 63 L61 63 L42 103 L20 103 Z M80 13 L94 51 L64 51 Z"/>
-          <path fill-rule="evenodd" fill="#1a1a1a" clip-path="url(#lc-out)"
+          <path fill-rule="evenodd" fill="#ede8df" clip-path="url(#lc-out)"
             d="M80 7 L134 103 L112 103 L97 63 L61 63 L42 103 L20 103 Z M80 13 L94 51 L64 51 Z"/>
         </svg>
         <span class="logo-name">Avera</span>
@@ -36,7 +36,7 @@
       </nav>
     </header>
 
-    <main>
+    <main class="inner-main">
 
       <section aria-labelledby="page-title">
         <p class="eyebrow">Work</p>
@@ -104,8 +104,8 @@
       </section>
 
       <section aria-label="Get in touch">
-        <h2>If any of this is familiar, it is worth a conversation.</h2>
-        <div class="cta-row">
+        <h2 data-reveal>If any of this is familiar, it is worth a conversation.</h2>
+        <div class="cta-row" data-reveal>
           <a class="cta" href="contact.html">Get in touch &rarr;</a>
         </div>
       </section>
@@ -118,8 +118,28 @@
     </footer>
 
   </div>
+
   <script>
     (function () {
+      // Scroll reveals
+      if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+        document.querySelectorAll('section').forEach(function (section) {
+          var children = section.querySelectorAll('[data-reveal]');
+          if (!children.length) return;
+          children.forEach(function (el, i) {
+            el.style.transitionDelay = (i * 80) + 'ms';
+          });
+          var observer = new IntersectionObserver(function (entries) {
+            if (entries[0].isIntersecting) {
+              children.forEach(function (el) { el.classList.add('in-view'); });
+              observer.disconnect();
+            }
+          }, { threshold: 0.1 });
+          observer.observe(section);
+        });
+      }
+
+      // Example scroll buttons
       var track = document.getElementById('examples-track');
       if (!track) return;
       var btnPrev = document.getElementById('ex-prev');
@@ -139,5 +159,6 @@
       });
     }());
   </script>
+
 </body>
 </html>
