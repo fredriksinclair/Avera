@@ -15,9 +15,7 @@
       --ink: #1a1a1a;
       --muted: #6b6b66;
       --rule: #e6e4dd;
-      --accent: #1a1a1a;
       --max: 760px;
-      --step: clamp(1.5rem, 2vw, 2rem);
     }
 
     @supports (font-variation-settings: normal) {
@@ -228,6 +226,14 @@
 
     footer a:hover { color: var(--ink); }
 
+    .visually-hidden {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
     /* Reduced motion */
     @media (prefers-reduced-motion: reduce) {
       * { transition: none !important; animation: none !important; }
@@ -257,7 +263,7 @@
       <section class="hero" aria-labelledby="hero-title">
         <h1 id="hero-title">Remove friction.<br />Build clarity.</h1>
         <p class="lede">
-          We help organizations create structure, reduce unnecessary work, and move forward with confidence.
+          We work with leadership teams to reduce friction, create clarity, and build the small practical systems that let organizations move forward.
         </p>
         <div class="cta-row">
           <a class="cta" href="#contact">
@@ -279,12 +285,12 @@
       <!-- WHAT WE DO -->
       <section class="what" aria-labelledby="what-title">
         <p class="eyebrow">What we do</p>
-        <h2 id="what-title">We think with leadership teams, and we build what is useful.</h2>
+        <h2 id="what-title">We think alongside leadership teams, and we build only what is needed.</h2>
         <p class="body">
           Most of the work begins with listening. We look honestly at how a team operates today &mdash; where decisions stall, where effort is duplicated, where ownership has quietly drifted &mdash; and then we name what we find, plainly.
         </p>
         <p class="body">
-          From there, we help teams simplify. Sometimes that means rewriting a process so it fits the people doing it. Sometimes it means designing a small, practical system that removes a recurring friction. We do only what is needed, and no more than that.
+          From there, we help teams simplify. Sometimes that means rewriting a process so it fits the people doing it. Sometimes it means designing a small, practical system that removes a recurring friction. We do only what is needed.
         </p>
       </section>
 
@@ -300,7 +306,7 @@
       <!-- PROOF -->
       <section class="proof" aria-labelledby="proof-title">
         <p class="eyebrow">An example</p>
-        <h2 id="proof-title" class="visually-hidden" style="position:absolute;left:-9999px;">An example</h2>
+        <h2 id="proof-title" class="visually-hidden">An example</h2>
         <blockquote>
           A leadership team of about forty had lost track of who owned what. We spent a few weeks listening, then mapped the work as it actually was. By the end, no one was repeating the same question in three meetings. The tools had not changed. The clarity had.
         </blockquote>
