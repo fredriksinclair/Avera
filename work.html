@@ -119,38 +119,18 @@
 
   </div>
 
+  <script src="animations.js"></script>
   <script>
     (function () {
-      // Scroll reveals
-      if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-        document.querySelectorAll('section').forEach(function (section) {
-          var children = section.querySelectorAll('[data-reveal]');
-          if (!children.length) return;
-          children.forEach(function (el, i) {
-            el.style.transitionDelay = (i * 80) + 'ms';
-          });
-          var observer = new IntersectionObserver(function (entries) {
-            if (entries[0].isIntersecting) {
-              children.forEach(function (el) { el.classList.add('in-view'); });
-              observer.disconnect();
-            }
-          }, { threshold: 0.1 });
-          observer.observe(section);
-        });
-      }
-
-      // Example scroll buttons
       var track = document.getElementById('examples-track');
       if (!track) return;
       var btnPrev = document.getElementById('ex-prev');
       var btnNext = document.getElementById('ex-next');
-
       function stepWidth() {
         var item = track.querySelector('.example-item');
         var gap = parseFloat(getComputedStyle(track).gap) || 0;
         return item ? item.offsetWidth + gap : 440;
       }
-
       if (btnPrev) btnPrev.addEventListener('click', function () {
         track.scrollBy({ left: -stepWidth(), behavior: 'smooth' });
       });

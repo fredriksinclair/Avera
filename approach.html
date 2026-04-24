@@ -103,25 +103,7 @@
 
   </div>
 
-  <script>
-    (function () {
-      if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
-      document.querySelectorAll('section').forEach(function (section) {
-        var children = section.querySelectorAll('[data-reveal]');
-        if (!children.length) return;
-        children.forEach(function (el, i) {
-          el.style.transitionDelay = (i * 80) + 'ms';
-        });
-        var observer = new IntersectionObserver(function (entries) {
-          if (entries[0].isIntersecting) {
-            children.forEach(function (el) { el.classList.add('in-view'); });
-            observer.disconnect();
-          }
-        }, { threshold: 0.1 });
-        observer.observe(section);
-      });
-    }());
-  </script>
+  <script src="animations.js"></script>
 
 </body>
 </html>
