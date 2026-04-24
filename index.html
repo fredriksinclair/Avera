@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Avera — Remove friction. Build clarity.</title>
-  <meta name="description" content="Avera helps organizations create structure, reduce unnecessary work, and move forward with confidence." />
+  <meta name="description" content="Avera helps organizations create structure, reduce friction, and move forward with confidence." />
 
   <link rel="preconnect" href="https://rsms.me/" />
   <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
@@ -15,7 +15,9 @@
       --ink: #1a1a1a;
       --muted: #6b6b66;
       --rule: #e6e4dd;
+      --surface: #edeae2;
       --max: 760px;
+      --gutter: clamp(1.5rem, 4vw, 2rem);
     }
 
     @supports (font-variation-settings: normal) {
@@ -50,7 +52,7 @@
     .page {
       max-width: var(--max);
       margin: 0 auto;
-      padding: clamp(1.75rem, 4vw, 2.5rem) clamp(1.5rem, 4vw, 2rem) clamp(4rem, 8vw, 6rem);
+      padding: clamp(1.75rem, 4vw, 2.5rem) var(--gutter) clamp(4rem, 8vw, 6rem);
     }
 
     /* Header */
@@ -108,6 +110,9 @@
       margin: 0;
     }
 
+    /* Hero headline lines — block so each sits on its own line */
+    .hero-line { display: block; }
+
     h1 {
       font-size: clamp(2.5rem, 6.2vw, 4.25rem);
       max-width: 14ch;
@@ -139,11 +144,9 @@
       line-height: 1.65;
     }
 
-    .body + .body {
-      margin-top: 1.25rem;
-    }
+    .body + .body { margin-top: 1.25rem; }
 
-    /* Hero CTA */
+    /* CTA */
     .cta-row {
       margin-top: clamp(2.25rem, 4vw, 3rem);
       display: flex;
@@ -160,7 +163,7 @@
       color: var(--ink);
       border-bottom: 1px solid var(--ink);
       padding: 0 0 2px;
-      transition: gap 200ms ease, opacity 200ms ease;
+      transition: gap 200ms ease;
     }
 
     .cta .arrow {
@@ -171,34 +174,43 @@
     .cta:hover { gap: 0.9rem; }
     .cta:hover .arrow { transform: translateX(2px); }
 
-    /* Statement */
+    /* Statement — billboard */
     .statement h2 {
-      font-size: clamp(1.75rem, 4.2vw, 2.75rem);
-      max-width: 22ch;
-      letter-spacing: -0.028em;
-      line-height: 1.15;
+      font-size: clamp(2.25rem, 5.5vw, 3.75rem);
+      max-width: 26ch;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
     }
 
     /* Proof */
     .proof blockquote {
       margin: 0;
-      padding: 0;
-      font-size: 1.125rem;
+      padding: 0 0 0 clamp(1.25rem, 3vw, 2rem);
+      border-left: 2px solid var(--ink);
+      font-size: 1.1875rem;
       line-height: 1.6;
-      max-width: 54ch;
+      max-width: 52ch;
     }
 
     .proof .attrib {
       margin-top: 1.5rem;
+      padding-left: clamp(1.25rem, 3vw, 2rem);
       font-size: 0.875rem;
       color: var(--muted);
       letter-spacing: 0.01em;
     }
 
-    /* Closing CTA */
-    .closing h2 {
-      max-width: 22ch;
+    /* Closing — warm panel, bleeds to container edges */
+    .closing {
+      background: var(--surface);
+      border-top: none;
+      margin-left: calc(-1 * var(--gutter));
+      margin-right: calc(-1 * var(--gutter));
+      padding-left: var(--gutter);
+      padding-right: var(--gutter);
     }
+
+    .closing h2 { max-width: 22ch; }
 
     .closing .meta {
       margin-top: clamp(1.5rem, 2.5vw, 2rem);
@@ -206,9 +218,7 @@
       color: var(--muted);
     }
 
-    .closing .cta-row {
-      margin-top: clamp(2rem, 3.5vw, 2.75rem);
-    }
+    .closing .cta-row { margin-top: clamp(2rem, 3.5vw, 2.75rem); }
 
     /* Footer */
     footer {
@@ -234,7 +244,31 @@
       overflow: hidden;
     }
 
-    /* Reduced motion */
+    /* Motion */
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      /* Hero load — lines stagger, then lede, then CTA */
+      .hero-line {
+        opacity: 0;
+        animation: rise 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+      .hero-line:nth-child(2)  { animation-delay: 120ms; }
+      .hero .lede              { opacity: 0; animation: rise 700ms cubic-bezier(0.22, 1, 0.36, 1) 260ms forwards; }
+      .hero .cta-row           { opacity: 0; animation: rise 700ms cubic-bezier(0.22, 1, 0.36, 1) 400ms forwards; }
+
+      /* Scroll reveals */
+      [data-reveal] {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 600ms ease, transform 600ms ease;
+      }
+      [data-reveal].in-view { opacity: 1; transform: none; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       * { transition: none !important; animation: none !important; }
     }
@@ -261,9 +295,12 @@
 
       <!-- HERO -->
       <section class="hero" aria-labelledby="hero-title">
-        <h1 id="hero-title">Remove friction.<br />Build clarity.</h1>
+        <h1 id="hero-title">
+          <span class="hero-line">Remove friction.</span>
+          <span class="hero-line">Build clarity.</span>
+        </h1>
         <p class="lede">
-          We work with leadership teams to reduce friction, create clarity, and build the small practical systems that let organizations move forward.
+          Most leadership teams are not short on capability. They are short on clarity. We fix that.
         </p>
         <div class="cta-row">
           <a class="cta" href="#contact">
@@ -275,8 +312,8 @@
 
       <!-- STATEMENT -->
       <section class="statement" aria-label="Perspective">
-        <p class="eyebrow">A perspective</p>
-        <h2>
+        <p class="eyebrow" data-reveal>A perspective</p>
+        <h2 data-reveal>
           Most organizations do not have a technology problem.
           They have a clarity problem.
         </h2>
@@ -284,43 +321,43 @@
 
       <!-- WHAT WE DO -->
       <section class="what" aria-labelledby="what-title">
-        <p class="eyebrow">What we do</p>
-        <h2 id="what-title">We think alongside leadership teams, and we build only what is needed.</h2>
-        <p class="body">
+        <p class="eyebrow" data-reveal>What we do</p>
+        <h2 id="what-title" data-reveal>We think alongside leadership teams, and we build only what is needed.</h2>
+        <p class="body" data-reveal>
           Most of the work begins with listening. We look honestly at how a team operates today &mdash; where decisions stall, where effort is duplicated, where ownership has quietly drifted &mdash; and then we name what we find, plainly.
         </p>
-        <p class="body">
+        <p class="body" data-reveal>
           From there, we help teams simplify. Sometimes that means rewriting a process so it fits the people doing it. Sometimes it means designing a small, practical system that removes a recurring friction. We do only what is needed.
         </p>
       </section>
 
       <!-- TRUST / OUTCOME -->
       <section class="outcome" aria-labelledby="outcome-title">
-        <p class="eyebrow">What changes</p>
-        <h2 id="outcome-title">The change is quieter than it sounds.</h2>
-        <p class="body">
-          Less confusion in the room. Fewer questions asked twice. A shared sense of what is happening and what comes next. The work itself does not become dramatic. It becomes calmer, and easier to do well. That, in our experience, is what lets good organizations keep moving forward.
+        <p class="eyebrow" data-reveal>What changes</p>
+        <h2 id="outcome-title" data-reveal>The change is quieter than it sounds.</h2>
+        <p class="body" data-reveal>
+          Less confusion in the room. Fewer questions asked twice. A shared sense of what is happening and what comes next. The work itself does not become dramatic. It becomes calmer, and easier to do well.
         </p>
       </section>
 
       <!-- PROOF -->
       <section class="proof" aria-labelledby="proof-title">
-        <p class="eyebrow">An example</p>
+        <p class="eyebrow" data-reveal>An example</p>
         <h2 id="proof-title" class="visually-hidden">An example</h2>
-        <blockquote>
+        <blockquote data-reveal>
           A leadership team of about forty had lost track of who owned what. We spent a few weeks listening, then mapped the work as it actually was. By the end, no one was repeating the same question in three meetings. The tools had not changed. The clarity had.
         </blockquote>
-        <p class="attrib">&mdash; A recent engagement</p>
+        <p class="attrib" data-reveal>&mdash; A recent engagement</p>
       </section>
 
       <!-- CLOSING CTA -->
       <section class="closing" id="contact" aria-labelledby="closing-title">
-        <p class="eyebrow">Start here</p>
-        <h2 id="closing-title">Let us create clarity in your organization.</h2>
-        <p class="meta">
+        <p class="eyebrow" data-reveal>Start here</p>
+        <h2 id="closing-title" data-reveal>Let us create clarity in your organization.</h2>
+        <p class="meta" data-reveal>
           A short conversation is usually the best place to begin.
         </p>
-        <div class="cta-row">
+        <div class="cta-row" data-reveal>
           <a class="cta" href="mailto:hello@avera.co">
             <span>hello@avera.co</span>
             <span class="arrow" aria-hidden="true">&rarr;</span>
@@ -336,5 +373,29 @@
     </footer>
 
   </div>
+
+  <script>
+    (function () {
+      if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+
+      document.querySelectorAll('section:not(.hero)').forEach(function (section) {
+        var children = section.querySelectorAll('[data-reveal]');
+        children.forEach(function (el, i) {
+          el.style.transitionDelay = (i * 80) + 'ms';
+        });
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              children.forEach(function (el) { el.classList.add('in-view'); });
+              observer.disconnect();
+            }
+          });
+        }, { threshold: 0.12 });
+
+        observer.observe(section);
+      });
+    }());
+  </script>
 </body>
 </html>
