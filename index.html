@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Avera — Remove friction. Build clarity.</title>
-  <meta name="description" content="Avera helps organizations create structure, reduce friction, and move forward with confidence." />
+  <meta name="description" content="Avera helps leadership teams fix messy operations, unclear ownership, and repetitive work." />
 
   <link rel="preconnect" href="https://rsms.me/" />
   <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
@@ -16,7 +16,7 @@
       --muted: #6b6b66;
       --rule: #e6e4dd;
       --surface: #edeae2;
-      --max: 760px;
+      --max: 700px;
       --gutter: clamp(1.5rem, 4vw, 2rem);
     }
 
@@ -110,7 +110,6 @@
       margin: 0;
     }
 
-    /* Hero headline lines — block so each sits on its own line */
     .hero-line { display: block; }
 
     h1 {
@@ -134,7 +133,7 @@
       margin-top: clamp(1.5rem, 2.5vw, 2rem);
       font-size: 1.0625rem;
       color: var(--muted);
-      max-width: 46ch;
+      max-width: 48ch;
       line-height: 1.55;
     }
 
@@ -145,6 +144,29 @@
     }
 
     .body + .body { margin-top: 1.25rem; }
+
+    /* Bullet list */
+    .list {
+      list-style: none;
+      margin: clamp(1.5rem, 2.5vw, 2rem) 0 0;
+      padding: 0;
+    }
+
+    .list li {
+      position: relative;
+      padding-left: 1.375rem;
+      font-size: 1.0625rem;
+      line-height: 1.5;
+    }
+
+    .list li + li { margin-top: 0.625rem; }
+
+    .list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }
 
     /* CTA */
     .cta-row {
@@ -174,12 +196,30 @@
     .cta:hover { gap: 0.9rem; }
     .cta:hover .arrow { transform: translateX(2px); }
 
-    /* Statement — billboard */
-    .statement h2 {
-      font-size: clamp(2.25rem, 5.5vw, 3.75rem);
-      max-width: 26ch;
+    /* Problem section */
+    .problem h2 {
+      font-size: clamp(2rem, 4.5vw, 3rem);
       letter-spacing: -0.03em;
       line-height: 1.1;
+      max-width: 18ch;
+    }
+
+    .problem-close {
+      margin-top: clamp(2rem, 3.5vw, 2.75rem);
+      font-size: 1.125rem;
+      font-weight: 500;
+      line-height: 1.5;
+      letter-spacing: -0.015em;
+      max-width: 38ch;
+    }
+
+    /* What we do — closing lines */
+    .what .closing-lines {
+      margin-top: clamp(1.5rem, 2.5vw, 2rem);
+      font-size: 1.0625rem;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 52ch;
     }
 
     /* Proof */
@@ -187,10 +227,13 @@
       margin: 0;
       padding: 0 0 0 clamp(1.25rem, 3vw, 2rem);
       border-left: 2px solid var(--ink);
-      font-size: 1.1875rem;
-      line-height: 1.6;
+      font-size: 1.1rem;
+      line-height: 1.65;
       max-width: 52ch;
     }
+
+    .proof blockquote p { margin: 0; }
+    .proof blockquote p + p { margin-top: 1rem; }
 
     .proof .attrib {
       margin-top: 1.5rem;
@@ -200,7 +243,7 @@
       letter-spacing: 0.01em;
     }
 
-    /* Closing — warm panel, bleeds to container edges */
+    /* Closing CTA */
     .closing {
       background: var(--surface);
       border-top: none;
@@ -210,12 +253,13 @@
       padding-right: var(--gutter);
     }
 
-    .closing h2 { max-width: 22ch; }
+    .closing h2 { max-width: 26ch; }
 
     .closing .meta {
       margin-top: clamp(1.5rem, 2.5vw, 2rem);
       font-size: 1rem;
       color: var(--muted);
+      max-width: 46ch;
     }
 
     .closing .cta-row { margin-top: clamp(2rem, 3.5vw, 2.75rem); }
@@ -251,7 +295,6 @@
     }
 
     @media (prefers-reduced-motion: no-preference) {
-      /* Hero load — lines stagger, then lede, then CTA */
       .hero-line {
         opacity: 0;
         animation: rise 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -260,7 +303,6 @@
       .hero .lede              { opacity: 0; animation: rise 700ms cubic-bezier(0.22, 1, 0.36, 1) 260ms forwards; }
       .hero .cta-row           { opacity: 0; animation: rise 700ms cubic-bezier(0.22, 1, 0.36, 1) 400ms forwards; }
 
-      /* Scroll reveals */
       [data-reveal] {
         opacity: 0;
         transform: translateY(24px);
@@ -300,44 +342,59 @@
           <span class="hero-line">Build clarity.</span>
         </h1>
         <p class="lede">
-          Most leadership teams are not short on capability. They are short on clarity. We fix that.
+          We help leadership teams fix messy operations, unclear ownership, and repetitive work &mdash; so things actually move forward.
         </p>
         <div class="cta-row">
           <a class="cta" href="#contact">
-            <span>Get in touch</span>
+            <span>Start a conversation</span>
             <span class="arrow" aria-hidden="true">&rarr;</span>
           </a>
         </div>
       </section>
 
-      <!-- STATEMENT -->
-      <section class="statement" aria-label="Perspective">
-        <p class="eyebrow" data-reveal>A perspective</p>
-        <h2 data-reveal>
-          Most organizations do not have a technology problem.
-          They have a clarity problem.
-        </h2>
+      <!-- PROBLEM -->
+      <section class="problem" aria-labelledby="problem-title">
+        <h2 id="problem-title" data-reveal>Where things break</h2>
+        <ul class="list" data-reveal>
+          <li>Work gets repeated</li>
+          <li>Decisions stall</li>
+          <li>No one owns what</li>
+          <li>Information is scattered</li>
+        </ul>
+        <p class="problem-close" data-reveal>
+          That is not a technology problem.<br />
+          It is a clarity problem.
+        </p>
       </section>
 
       <!-- WHAT WE DO -->
       <section class="what" aria-labelledby="what-title">
         <p class="eyebrow" data-reveal>What we do</p>
-        <h2 id="what-title" data-reveal>We think alongside leadership teams, and we build only what is needed.</h2>
-        <p class="body" data-reveal>
-          Most of the work begins with listening. We look honestly at how a team operates today &mdash; where decisions stall, where effort is duplicated, where ownership has quietly drifted &mdash; and then we name what we find, plainly.
-        </p>
-        <p class="body" data-reveal>
-          From there, we help teams simplify. Sometimes that means rewriting a process so it fits the people doing it. Sometimes it means designing a small, practical system that removes a recurring friction. We do only what is needed.
+        <h2 id="what-title" data-reveal>What we actually do</h2>
+        <p class="body" data-reveal>We work directly with leadership teams to:</p>
+        <ul class="list" data-reveal>
+          <li>clarify ownership and decision-making</li>
+          <li>simplify how work flows across teams</li>
+          <li>remove recurring friction in daily operations</li>
+        </ul>
+        <p class="closing-lines" data-reveal>
+          Sometimes this means redesigning a process.<br />
+          Sometimes it means building a small internal tool.<br />
+          Always, it means making things easier to run.
         </p>
       </section>
 
-      <!-- TRUST / OUTCOME -->
+      <!-- OUTCOMES -->
       <section class="outcome" aria-labelledby="outcome-title">
         <p class="eyebrow" data-reveal>What changes</p>
         <h2 id="outcome-title" data-reveal>The change is quieter than it sounds.</h2>
-        <p class="body" data-reveal>
-          Less confusion in the room. Fewer questions asked twice. A shared sense of what is happening and what comes next. The work itself does not become dramatic. It becomes calmer, and easier to do well.
-        </p>
+        <ul class="list" data-reveal>
+          <li>Fewer repeated questions</li>
+          <li>Clear ownership</li>
+          <li>Faster decisions</li>
+          <li>Less admin</li>
+        </ul>
+        <p class="body" data-reveal>The work does not become louder. It becomes easier to do well.</p>
       </section>
 
       <!-- PROOF -->
@@ -345,7 +402,9 @@
         <p class="eyebrow" data-reveal>An example</p>
         <h2 id="proof-title" class="visually-hidden">An example</h2>
         <blockquote data-reveal>
-          A leadership team of about forty had lost track of who owned what. We spent a few weeks listening, then mapped the work as it actually was. By the end, no one was repeating the same question in three meetings. The tools had not changed. The clarity had.
+          <p>A forty-person leadership team had lost track of who owned what. The same questions surfaced in every meeting.</p>
+          <p>We spent three weeks listening, then helped them map how work actually moved &mdash; not as they assumed it did. Ownership got named. Handoffs got simplified.</p>
+          <p>No new tools. The repeated questions stopped.</p>
         </blockquote>
         <p class="attrib" data-reveal>&mdash; A recent engagement</p>
       </section>
@@ -353,9 +412,9 @@
       <!-- CLOSING CTA -->
       <section class="closing" id="contact" aria-labelledby="closing-title">
         <p class="eyebrow" data-reveal>Start here</p>
-        <h2 id="closing-title" data-reveal>Let us create clarity in your organization.</h2>
+        <h2 id="closing-title" data-reveal>Let us fix what is slowing you down.</h2>
         <p class="meta" data-reveal>
-          A short conversation is usually the best place to begin.
+          A short conversation is usually enough to see if this is useful.
         </p>
         <div class="cta-row" data-reveal>
           <a class="cta" href="mailto:hello@avera.co">
