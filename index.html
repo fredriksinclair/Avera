@@ -48,7 +48,6 @@
       width: 100%;
     }
 
-    /* All sections: full-screen, dark by default */
     section {
       min-height: 100vh;
       display: flex;
@@ -59,6 +58,29 @@
       --fg: #ede8df;
       --fg-muted: rgba(237, 232, 223, 0.42);
       color: var(--fg);
+    }
+
+    /* =====================
+       TWO-COLUMN
+    ===================== */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 7vw, 6rem);
+      align-items: start;
+    }
+
+    .two-col-left {
+      position: sticky;
+      top: clamp(4rem, 8vh, 6rem);
+    }
+
+    @media (max-width: 760px) {
+      .two-col {
+        grid-template-columns: 1fr;
+        gap: clamp(2rem, 4vw, 2.5rem);
+      }
+      .two-col-left { position: static; }
     }
 
     /* =====================
@@ -193,7 +215,7 @@
     .cta:hover .arrow { transform: translateX(3px); }
 
     /* =====================
-       PROBLEM — dark warm brown
+       PROBLEM
     ===================== */
     .problem { background: #121008; }
 
@@ -216,10 +238,18 @@
       padding: clamp(0.875rem, 2vh, 1.25rem) 0;
       border-bottom: 1px solid rgba(237, 232, 223, 0.08);
       color: var(--fg);
+      transition: transform 250ms ease;
     }
 
     .break-list li:first-child {
       border-top: 1px solid rgba(237, 232, 223, 0.08);
+    }
+
+    @media (hover: hover) {
+      .break-list li:hover {
+        transform: translateX(10px);
+        transition-duration: 150ms;
+      }
     }
 
     .problem-close {
@@ -232,7 +262,7 @@
     }
 
     /* =====================
-       WHAT WE DO — warm cream
+       WHAT WE DO
     ===================== */
     .what {
       background: #f5f0e8;
@@ -242,9 +272,16 @@
 
     .what h2 { font-size: clamp(2rem, 4.5vw, 3rem); }
 
+    .intro-line {
+      margin-top: clamp(1.5rem, 3vw, 2rem);
+      font-size: 1.0625rem;
+      line-height: 1.65;
+      color: var(--fg-muted);
+    }
+
     .dot-list {
       list-style: none;
-      margin: clamp(1.5rem, 3vw, 2.25rem) 0 0;
+      margin: 0;
       padding: 0;
     }
 
@@ -254,6 +291,7 @@
       font-size: 1.0625rem;
       line-height: 1.55;
       color: var(--fg);
+      transition: transform 250ms ease;
     }
 
     .dot-list li + li { margin-top: 0.625rem; }
@@ -265,20 +303,29 @@
       color: var(--fg-muted);
     }
 
-    .what .closing-lines {
-      margin-top: clamp(2rem, 4vw, 3rem);
+    @media (hover: hover) {
+      .dot-list li:hover {
+        transform: translateX(6px);
+        transition-duration: 150ms;
+      }
+    }
+
+    .closing-line {
       font-size: 1.0625rem;
-      line-height: 2;
+      line-height: 1.65;
       color: var(--fg-muted);
       max-width: 50ch;
+      margin-top: 0.75rem;
+    }
+
+    .dot-list + .closing-line {
+      margin-top: clamp(2rem, 4vw, 3rem);
     }
 
     /* =====================
-       OUTCOMES — dark warm
+       OUTCOMES
     ===================== */
     .outcome { background: #1a1714; }
-
-    .outcome .dot-list { margin-top: clamp(2rem, 4vw, 3rem); }
 
     .outcome .dot-list li {
       font-size: clamp(1.0625rem, 2vw, 1.25rem);
@@ -293,7 +340,7 @@
     }
 
     /* =====================
-       PROOF — deepest dark
+       PROOF
     ===================== */
     .proof { background: #0a0908; }
 
@@ -306,6 +353,13 @@
       letter-spacing: -0.015em;
       line-height: 1.65;
       max-width: 50ch;
+      transition: border-left-color 350ms ease;
+    }
+
+    @media (hover: hover) {
+      .proof blockquote:hover {
+        border-left-color: rgba(237, 232, 223, 0.55);
+      }
     }
 
     .proof blockquote p { margin: 0; }
@@ -320,7 +374,7 @@
     }
 
     /* =====================
-       CLOSING CTA — warm sand
+       CLOSING CTA
     ===================== */
     .closing {
       background: #c9a882;
@@ -382,12 +436,21 @@
       .hero .lede    { opacity: 0; animation: rise 900ms cubic-bezier(0.22, 1, 0.36, 1) 320ms forwards; }
       .hero .cta-row { opacity: 0; animation: rise 900ms cubic-bezier(0.22, 1, 0.36, 1) 480ms forwards; }
 
+      /* Section-level vertical reveals */
       [data-reveal] {
         opacity: 0;
         transform: translateY(28px);
         transition: opacity 700ms ease, transform 700ms ease;
       }
       [data-reveal].in-view { opacity: 1; transform: none; }
+
+      /* Per-item horizontal slide-in */
+      [data-reveal-item] {
+        opacity: 0;
+        transform: translateX(-18px);
+        transition: opacity 550ms cubic-bezier(0.22, 1, 0.36, 1), transform 550ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      [data-reveal-item].in-view { opacity: 1; transform: none; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -411,7 +474,6 @@
     <section class="hero" aria-labelledby="hero-title">
       <header class="site-header">
         <a href="/" class="mark" aria-label="Avera, home">
-          <!-- Logo mark: cream block with split A — inverted for dark background -->
           <svg class="logo-mark" viewBox="0 0 158 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <defs>
               <clipPath id="lc-in">
@@ -421,14 +483,10 @@
                 <rect x="96" width="62" height="110"/>
               </clipPath>
             </defs>
-            <!-- Cream block -->
             <rect width="96" height="110" fill="#ede8df"/>
-            <!-- Dot -->
             <rect x="13" y="79" width="13" height="13" fill="#0d0c0a"/>
-            <!-- A inside block: dark on cream -->
             <path fill-rule="evenodd" fill="#0d0c0a" clip-path="url(#lc-in)"
               d="M80 7 L134 103 L112 103 L97 63 L61 63 L42 103 L20 103 Z M80 13 L94 51 L64 51 Z"/>
-            <!-- A outside block: cream on dark -->
             <path fill-rule="evenodd" fill="#ede8df" clip-path="url(#lc-out)"
               d="M80 7 L134 103 L112 103 L97 63 L61 63 L42 103 L20 103 Z M80 13 L94 51 L64 51 Z"/>
           </svg>
@@ -459,11 +517,11 @@
     <section class="problem" aria-labelledby="problem-title">
       <div class="container">
         <h2 id="problem-title" data-reveal>Where things break</h2>
-        <ul class="break-list" data-reveal>
-          <li>Work gets repeated</li>
-          <li>Decisions stall</li>
-          <li>No one owns what</li>
-          <li>Information is scattered</li>
+        <ul class="break-list">
+          <li data-reveal>Work gets repeated</li>
+          <li data-reveal>Decisions stall</li>
+          <li data-reveal>No one owns what</li>
+          <li data-reveal>Information is scattered</li>
         </ul>
         <p class="problem-close" data-reveal>
           That is not a technology problem.<br />
@@ -475,34 +533,44 @@
     <!-- WHAT WE DO -->
     <section class="what" aria-labelledby="what-title">
       <div class="container">
-        <p class="eyebrow" data-reveal>What we do</p>
-        <h2 id="what-title" data-reveal>What we actually do</h2>
-        <p class="body" data-reveal>We work directly with leadership teams to:</p>
-        <ul class="dot-list" data-reveal>
-          <li>clarify ownership and decision-making</li>
-          <li>simplify how work flows across teams</li>
-          <li>remove recurring friction in daily operations</li>
-        </ul>
-        <p class="closing-lines" data-reveal>
-          Sometimes this means redesigning a process.<br />
-          Sometimes it means building a small internal tool.<br />
-          Always, it means making things easier to run.
-        </p>
+        <div class="two-col">
+          <div class="two-col-left">
+            <p class="eyebrow" data-reveal>What we do</p>
+            <h2 id="what-title" data-reveal>What we actually do</h2>
+            <p class="intro-line" data-reveal>We work directly with leadership teams to:</p>
+          </div>
+          <div class="two-col-right">
+            <ul class="dot-list">
+              <li data-reveal-item>clarify ownership and decision-making</li>
+              <li data-reveal-item>simplify how work flows across teams</li>
+              <li data-reveal-item>remove recurring friction in daily operations</li>
+            </ul>
+            <p class="closing-line" data-reveal-item>Sometimes this means redesigning a process.</p>
+            <p class="closing-line" data-reveal-item>Sometimes it means building a small internal tool.</p>
+            <p class="closing-line" data-reveal-item>Always, it means making things easier to run.</p>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- OUTCOMES -->
     <section class="outcome" aria-labelledby="outcome-title">
       <div class="container">
-        <p class="eyebrow" data-reveal>What changes</p>
-        <h2 id="outcome-title" data-reveal>The change is quieter than it sounds.</h2>
-        <ul class="dot-list" data-reveal>
-          <li>Fewer repeated questions</li>
-          <li>Clear ownership</li>
-          <li>Faster decisions</li>
-          <li>Less admin</li>
-        </ul>
-        <p class="body" data-reveal>The work does not become louder. It becomes easier to do well.</p>
+        <div class="two-col">
+          <div class="two-col-left">
+            <p class="eyebrow" data-reveal>What changes</p>
+            <h2 id="outcome-title" data-reveal>The change is quieter than it sounds.</h2>
+          </div>
+          <div class="two-col-right">
+            <ul class="dot-list">
+              <li data-reveal-item>Fewer repeated questions</li>
+              <li data-reveal-item>Clear ownership</li>
+              <li data-reveal-item>Faster decisions</li>
+              <li data-reveal-item>Less admin</li>
+            </ul>
+            <p class="body" data-reveal-item>The work does not become louder. It becomes easier to do well.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -548,12 +616,13 @@
     (function () {
       if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
 
+      // Section-level staggered reveals (vertical rise)
       document.querySelectorAll('section:not(.hero)').forEach(function (section) {
         var children = section.querySelectorAll('[data-reveal]');
+        if (!children.length) return;
         children.forEach(function (el, i) {
           el.style.transitionDelay = (i * 90) + 'ms';
         });
-
         var observer = new IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
             if (entry.isIntersecting) {
@@ -562,8 +631,20 @@
             }
           });
         }, { threshold: 0.1 });
-
         observer.observe(section);
+      });
+
+      // Per-item individual reveals (horizontal slide)
+      document.querySelectorAll('[data-reveal-item]').forEach(function (el, idx) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              el.classList.add('in-view');
+              observer.disconnect();
+            }
+          });
+        }, { threshold: 0.25 });
+        observer.observe(el);
       });
     }());
   </script>
