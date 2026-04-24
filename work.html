@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Work — Avera</title>
+  <meta name="description" content="Examples of Avera's work: fixing operational clarity for leadership teams." />
+  <link rel="preconnect" href="https://rsms.me/" />
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+
+    <header class="site-header">
+      <a href="index.html" class="mark" aria-label="Avera, home">
+        <svg class="logo-mark" viewBox="0 0 158 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <clipPath id="lc-in"><rect width="96" height="110"/></clipPath>
+            <clipPath id="lc-out"><rect x="96" width="62" height="110"/></clipPath>
+          </defs>
+          <rect width="96" height="110" fill="#ede8df"/>
+          <rect x="13" y="79" width="13" height="13" fill="#0d0c0a"/>
+          <path fill-rule="evenodd" fill="#0d0c0a" clip-path="url(#lc-in)"
+            d="M80 7 L134 103 L112 103 L97 63 L61 63 L42 103 L20 103 Z M80 13 L94 51 L64 51 Z"/>
+          <path fill-rule="evenodd" fill="#ede8df" clip-path="url(#lc-out)"
+            d="M80 7 L134 103 L112 103 L97 63 L61 63 L42 103 L20 103 Z M80 13 L94 51 L64 51 Z"/>
+        </svg>
+        <span class="logo-name">Avera</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="approach.html">Our approach</a>
+        <a href="work.html" class="active">Work</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <main class="inner-main">
+
+      <section aria-labelledby="page-title">
+        <p class="eyebrow">Work</p>
+        <h1 id="page-title">A few examples of what this looks like in practice.</h1>
+        <p class="lede">Engagements are kept confidential. These are described in general terms with permission.</p>
+      </section>
+
+      <section aria-label="Examples">
+
+        <div class="examples-header">
+          <p class="eyebrow">Examples</p>
+          <div class="examples-nav" aria-label="Browse examples">
+            <button class="examples-btn" id="ex-prev" aria-label="Previous example">&#8592;</button>
+            <button class="examples-btn" id="ex-next" aria-label="Next example">&#8594;</button>
+          </div>
+        </div>
+
+        <div class="examples-track-outer">
+          <div class="examples-track" id="examples-track">
+
+            <div class="example-item">
+              <div class="example-text">
+                <p>A leadership team was overseeing more than a dozen active initiatives.</p>
+                <p>Most were moving, but slowly.</p>
+                <p>Attention shifted week to week. What was important depended on what was most visible.</p>
+                <p>We looked at how leadership time was actually spent across those initiatives.</p>
+                <p>It didn&rsquo;t match the stated priorities.</p>
+                <p>They reduced the number of active initiatives and clarified which ones required direct involvement.</p>
+                <p>Some work was paused. Some moved forward without them.</p>
+                <p>Progress became less evenly distributed, but more deliberate.</p>
+              </div>
+              <p class="example-attrib">&mdash; Recent engagement</p>
+            </div>
+
+            <div class="example-item">
+              <div class="example-text">
+                <p>A company had defined an operating model during a previous phase of growth.</p>
+                <p>Roles, responsibilities, and decision points were documented.</p>
+                <p>In practice, people worked around it.</p>
+                <p>Decisions escalated unpredictably. Some areas moved quickly, others stalled.</p>
+                <p>We spent time with teams to see how decisions were actually being made.</p>
+                <p>They adjusted the model to match reality and removed parts that weren&rsquo;t being used.</p>
+                <p>Fewer exceptions were needed afterward.</p>
+                <p>Work followed a more predictable path.</p>
+              </div>
+              <p class="example-attrib">&mdash; Recent engagement</p>
+            </div>
+
+            <div class="example-item">
+              <div class="example-text">
+                <p>A leadership team set clear quarterly priorities.</p>
+                <p>But they didn&rsquo;t consistently translate into team-level work.</p>
+                <p>Some areas over-indexed on them. Others ignored them entirely.</p>
+                <p>We looked at how priorities were being turned into plans.</p>
+                <p>There was no clear link between the two.</p>
+                <p>They introduced a simple layer to connect priorities to execution.</p>
+                <p>Over time, the work began to reflect the intent.</p>
+              </div>
+              <p class="example-attrib">&mdash; Recent engagement</p>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+      <section aria-label="Get in touch">
+        <h2 data-reveal>If any of this is familiar, it is worth a conversation.</h2>
+        <div class="cta-row" data-reveal>
+          <a class="cta" href="contact.html">Get in touch &rarr;</a>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <span>&copy; Avera</span>
+      <span>Considered work, quietly done.</span>
+    </footer>
+
+  </div>
+
+  <script src="animations.js"></script>
+  <script>
+    (function () {
+      var track = document.getElementById('examples-track');
+      if (!track) return;
+      var btnPrev = document.getElementById('ex-prev');
+      var btnNext = document.getElementById('ex-next');
+      function stepWidth() {
+        var item = track.querySelector('.example-item');
+        var gap = parseFloat(getComputedStyle(track).gap) || 0;
+        return item ? item.offsetWidth + gap : 440;
+      }
+      if (btnPrev) btnPrev.addEventListener('click', function () {
+        track.scrollBy({ left: -stepWidth(), behavior: 'smooth' });
+      });
+      if (btnNext) btnNext.addEventListener('click', function () {
+        track.scrollBy({ left: stepWidth(), behavior: 'smooth' });
+      });
+    }());
+  </script>
+
+</body>
+</html>
