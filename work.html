@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="page">
 
     <header class="site-header">
       <a href="index.html" class="mark" aria-label="Avera, home">
@@ -39,18 +38,22 @@
     <main class="inner-main">
 
       <section aria-labelledby="page-title">
-        <p class="eyebrow">Work</p>
-        <h1 id="page-title">A few examples of what this looks like in practice.</h1>
-        <p class="lede">Engagements are kept confidential. These are described in general terms with permission.</p>
+        <div class="container">
+          <p class="eyebrow">Work</p>
+          <h1 id="page-title">A few examples of what this looks like in practice.</h1>
+          <p class="lede">Engagements are kept confidential. These are described in general terms with permission.</p>
+        </div>
       </section>
 
       <section aria-label="Examples">
 
-        <div class="examples-header">
-          <p class="eyebrow">Examples</p>
-          <div class="examples-nav" aria-label="Browse examples">
-            <button class="examples-btn" id="ex-prev" aria-label="Previous example">&#8592;</button>
-            <button class="examples-btn" id="ex-next" aria-label="Next example">&#8594;</button>
+        <div class="container">
+          <div class="examples-header">
+            <p class="eyebrow">Examples</p>
+            <div class="examples-nav" aria-label="Browse examples">
+              <button class="examples-btn" id="ex-prev" aria-label="Previous example">&#8592;</button>
+              <button class="examples-btn" id="ex-next" aria-label="Next example">&#8594;</button>
+            </div>
           </div>
         </div>
 
@@ -104,9 +107,11 @@
       </section>
 
       <section aria-label="Get in touch">
-        <h2 data-reveal>If any of this is familiar, it is worth a conversation.</h2>
-        <div class="cta-row" data-reveal>
-          <a class="cta" href="contact.html">Get in touch &rarr;</a>
+        <div class="container">
+          <h2 data-reveal>If any of this is familiar, it is worth a conversation.</h2>
+          <div class="cta-row" data-reveal>
+            <a class="cta" href="contact.html">Get in touch &rarr;</a>
+          </div>
         </div>
       </section>
 
@@ -116,8 +121,6 @@
       <span>&copy; Avera</span>
       <span>Considered work, quietly done.</span>
     </footer>
-
-  </div>
 
   <script src="animations.js"></script>
   <script>
