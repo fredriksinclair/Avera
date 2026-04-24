@@ -123,9 +123,24 @@
     }
 
     .mark {
-      font-weight: 500;
-      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+    }
+
+    .logo-mark {
+      display: block;
+      height: 26px;
+      width: auto;
+      flex-shrink: 0;
+    }
+
+    .logo-name {
       font-size: 0.9375rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--fg);
     }
 
     .nav a {
@@ -395,7 +410,30 @@
     <!-- HERO -->
     <section class="hero" aria-labelledby="hero-title">
       <header class="site-header">
-        <a href="/" class="mark" aria-label="Avera, home">Avera</a>
+        <a href="/" class="mark" aria-label="Avera, home">
+          <!-- Logo mark: cream block with split A — inverted for dark background -->
+          <svg class="logo-mark" viewBox="0 0 158 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <clipPath id="lc-in">
+                <rect width="96" height="110"/>
+              </clipPath>
+              <clipPath id="lc-out">
+                <rect x="96" width="62" height="110"/>
+              </clipPath>
+            </defs>
+            <!-- Cream block -->
+            <rect width="96" height="110" fill="#ede8df"/>
+            <!-- Dot -->
+            <rect x="13" y="79" width="13" height="13" fill="#0d0c0a"/>
+            <!-- A inside block: dark on cream -->
+            <path fill-rule="evenodd" fill="#0d0c0a" clip-path="url(#lc-in)"
+              d="M80 7 L134 103 L112 103 L97 63 L61 63 L42 103 L20 103 Z M80 13 L94 51 L64 51 Z"/>
+            <!-- A outside block: cream on dark -->
+            <path fill-rule="evenodd" fill="#ede8df" clip-path="url(#lc-out)"
+              d="M80 7 L134 103 L112 103 L97 63 L61 63 L42 103 L20 103 Z M80 13 L94 51 L64 51 Z"/>
+          </svg>
+          <span class="logo-name">Avera</span>
+        </a>
         <nav class="nav" aria-label="Primary">
           <a href="#contact">Contact</a>
         </nav>
