@@ -125,6 +125,7 @@
     var nav = document.getElementById('site-nav');
     if (!nav) return;
     var page = window.location.pathname.split('/').pop() || 'index.html';
+    nav.innerHTML = '';
     NAV_LINKS.forEach(function (link) {
       var a = document.createElement('a');
       a.href = link.href;
