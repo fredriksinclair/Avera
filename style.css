@@ -44,6 +44,12 @@ a { color: inherit; text-decoration: none; }
   width: 100%;
 }
 
+.page {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
 /* =====================
    HEADER
 ===================== */
@@ -286,7 +292,8 @@ blockquote p + p { margin-top: 1em; }
 }
 
 .examples-track-outer {
-  width: 100%;
+  margin-left: calc(-1 * var(--gutter));
+  margin-right: calc(-1 * var(--gutter));
 }
 
 .examples-track {
