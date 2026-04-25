@@ -111,8 +111,33 @@
   }
 
   /* ─────────────────────────────────────────────
+     NAV — single source of truth for link labels.
+     Edit here to rename a tab across every page.
+  ───────────────────────────────────────────── */
+  var NAV_LINKS = [
+    { href: 'index.html',    label: 'Home' },
+    { href: 'approach.html', label: 'Our approach' },
+    { href: 'work.html',     label: 'Our work' },
+    { href: 'contact.html',  label: 'Contact' },
+  ];
+
+  function setupNav() {
+    var nav = document.getElementById('site-nav');
+    if (!nav) return;
+    var page = window.location.pathname.split('/').pop() || 'index.html';
+    NAV_LINKS.forEach(function (link) {
+      var a = document.createElement('a');
+      a.href = link.href;
+      a.textContent = link.label;
+      if (page === link.href) a.className = 'active';
+      nav.appendChild(a);
+    });
+  }
+
+  /* ─────────────────────────────────────────────
      INIT
   ───────────────────────────────────────────── */
+  setupNav();
   setupHero();
   setupPageTitle();
   setupSectionReveals();

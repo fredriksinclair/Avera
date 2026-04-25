@@ -101,18 +101,18 @@ a { color: inherit; text-decoration: none; }
 /* =====================
    INNER PAGE SECTIONS
 ===================== */
-main.inner-main {
-  padding: clamp(4rem, 8vw, 6rem) 0 clamp(7rem, 14vw, 10rem);
-}
-
 main.inner-main section {
-  padding: clamp(3.5rem, 7vw, 5.5rem) 0;
-  border-top: 1px solid var(--rule);
+  padding: clamp(4rem, 8vw, 6rem) 0;
 }
 
-main.inner-main section:first-of-type {
-  border-top: none;
-  padding-top: 0;
+/* Section colour variants — used as dividers instead of rules */
+.section-b   { background: #121008; }
+.section-c   { background: #0a0908; }
+.section-cta {
+  background: #c9a882;
+  --fg: #1a1a1a;
+  --fg-muted: rgba(26, 26, 26, 0.55);
+  color: var(--fg);
 }
 
 /* =====================
@@ -388,33 +388,6 @@ footer {
   [data-reveal].in-view { opacity: 1; transform: none; }
 }
 
-/* =====================
-   SECTION RULE ANIMATION
-   The border-top of inner-page sections
-   extends from left when the section enters view.
-===================== */
-@media (prefers-reduced-motion: no-preference) {
-  main.inner-main section {
-    border-top: none;
-    position: relative;
-  }
-
-  main.inner-main section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: var(--rule);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  main.inner-main section.in-view::before { transform: scaleX(1); }
-  main.inner-main section:first-of-type::before { display: none; }
-}
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
