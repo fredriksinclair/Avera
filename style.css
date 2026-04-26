@@ -394,6 +394,59 @@ footer {
 }
 
 /* =====================
+   PAGE TRANSITIONS
+===================== */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes page-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  body { animation: page-in 0.22s ease both; }
+  body.page-leaving {
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+}
+
+/* =====================
+   SECTION NUMBER WATERMARKS
+   Large faint ordinal in the right margin of inner page
+   content sections (visible on wide screens only).
+===================== */
+@media (min-width: 1200px) {
+  main.inner-main section[data-num] { position: relative; }
+
+  main.inner-main section[data-num]::after {
+    content: attr(data-num);
+    position: absolute;
+    right: var(--gutter);
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: clamp(6rem, 11vw, 11rem);
+    font-weight: 700;
+    color: rgba(237, 232, 223, 0.05);
+    letter-spacing: -0.05em;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+}
+
+@media (min-width: 1200px) and (prefers-reduced-motion: no-preference) {
+  main.inner-main section[data-num]::after {
+    opacity: 0;
+    transform: translateY(-50%) translateX(2.5rem);
+    transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  main.inner-main section.in-view[data-num]::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
+/* =====================
    UTILITY
 ===================== */
 .visually-hidden {

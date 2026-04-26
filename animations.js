@@ -136,6 +136,24 @@
   }
 
   /* ─────────────────────────────────────────────
+     PAGE TRANSITIONS
+     Intercepts internal link clicks to fade the page
+     out before navigating.
+  ───────────────────────────────────────────── */
+  function setupPageTransitions() {
+    if (!motion) return;
+    document.querySelectorAll('a[href]').forEach(function (link) {
+      var href = link.getAttribute('href');
+      if (!href || href.charAt(0) === '#' || href.indexOf('mailto:') === 0 || href.indexOf('http') === 0) return;
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.body.classList.add('page-leaving');
+        setTimeout(function () { window.location.href = href; }, 210);
+      });
+    });
+  }
+
+  /* ─────────────────────────────────────────────
      INIT
   ───────────────────────────────────────────── */
   setupNav();
@@ -143,5 +161,6 @@
   setupPageTitle();
   setupSectionReveals();
   setupParallax();
+  setupPageTransitions();
 
 }());

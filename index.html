@@ -63,6 +63,47 @@
       }
       .hero [data-reveal].in-view { opacity: 1; transform: none; }
     }
+
+    /* Large "A" watermark — bleeds from right edge of each section */
+    .statement, .closing {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .statement::after, .closing::after {
+      content: 'A';
+      position: absolute;
+      right: -0.06em;
+      top: 50%;
+      font-size: clamp(18rem, 38vw, 38rem);
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      line-height: 0.85;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .statement::after { color: rgba(237, 232, 223, 0.032); }
+    .closing::after   { color: rgba(26,  26,  26,  0.06);  }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .statement::after, .closing::after {
+        opacity: 0;
+        transform: translateY(-50%) translateX(3.5rem);
+        transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .statement.in-view::after, .closing.in-view::after {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .statement::after, .closing::after {
+        transform: translateY(-50%);
+      }
+    }
   </style>
 </head>
 <body>
