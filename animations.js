@@ -41,7 +41,6 @@
         revealLine(inner, 60 + i * 150);
       });
 
-      // lede + cta-row fade in after heading finishes
       setTimeout(function () {
         document.querySelectorAll('.hero [data-reveal]').forEach(function (el) {
           el.classList.add('in-view');
@@ -58,31 +57,42 @@
     var h1 = document.querySelector('main.inner-main h1');
     if (!h1 || !motion) return;
     var inner = maskEl(h1);
-    revealLine(inner, 120);
+    revealLine(inner, 160);
   }
 
   /* ─────────────────────────────────────────────
      SECTION CONTENT REVEALS
-     IntersectionObserver per section — adds in-view
-     to the section (for rule animation) and to each
-     [data-reveal] child with staggered delay.
+     H2/H3 elements get the line-mask slide-up.
+     Everything else fades + rises on scroll.
   ───────────────────────────────────────────── */
   function setupSectionReveals() {
     document.querySelectorAll('section:not(.hero)').forEach(function (section) {
-      var els = section.querySelectorAll('[data-reveal]');
+      var all = Array.prototype.slice.call(section.querySelectorAll('[data-reveal]'));
+      var lineInners = [];
+      var fadeEls    = [];
 
-      // Apply stagger delays
-      els.forEach(function (el, i) {
-        el.style.transitionDelay = (i * 110) + 'ms';
+      all.forEach(function (el) {
+        if (motion && (el.tagName === 'H2' || el.tagName === 'H3')) {
+          el.removeAttribute('data-reveal');
+          lineInners.push(maskEl(el));
+        } else {
+          fadeEls.push(el);
+        }
+      });
+
+      var staggerBase = lineInners.length ? 180 : 0;
+      fadeEls.forEach(function (el, i) {
+        el.style.transitionDelay = (staggerBase + i * 110) + 'ms';
       });
 
       var io = new IntersectionObserver(function (entries) {
         if (entries[0].isIntersecting) {
           section.classList.add('in-view');
-          els.forEach(function (el) { el.classList.add('in-view'); });
+          lineInners.forEach(function (inner, i) { revealLine(inner, i * 110); });
+          fadeEls.forEach(function (el) { el.classList.add('in-view'); });
           io.disconnect();
         }
-      }, { threshold: 0.1 });
+      }, { threshold: 0.08 });
 
       io.observe(section);
     });
@@ -90,8 +100,6 @@
 
   /* ─────────────────────────────────────────────
      HERO PARALLAX
-     Hero content rises slightly as you scroll away
-     from it, creating depth.
   ───────────────────────────────────────────── */
   function setupParallax() {
     var content = document.querySelector('.hero-content');
@@ -101,8 +109,7 @@
     window.addEventListener('scroll', function () {
       if (!ticking) {
         requestAnimationFrame(function () {
-          var y = window.scrollY;
-          content.style.transform = 'translateY(' + (y * 0.28) + 'px)';
+          content.style.transform = 'translateY(' + (window.scrollY * 0.28) + 'px)';
           ticking = false;
         });
         ticking = true;
@@ -137,19 +144,54 @@
   }
 
   /* ─────────────────────────────────────────────
-     PAGE TRANSITIONS
-     Intercepts internal link clicks to fade the page
-     out before navigating.
+     PAGE TRANSITIONS — cream curtain wipe
+     Exit: cream panel sweeps in from the right,
+           covering the page before navigation.
+     Entry: cream panel starts covering, then
+            sweeps off to the right revealing the
+            new page.
   ───────────────────────────────────────────── */
   function setupPageTransitions() {
     if (!motion) return;
+
+    var EASE     = 'cubic-bezier(0.76, 0, 0.24, 1)';
+    var DUR_IN   = 520; // reveal: slower, lets the new page breathe
+    var DUR_OUT  = 400; // cover: snappier
+
+    var overlay = document.createElement('div');
+    overlay.className = 'page-overlay';
+    document.body.appendChild(overlay);
+
+    // Entry: overlay covers on arrival, then sweeps right to reveal
+    overlay.style.cssText = 'transform:translateX(0);transition:none';
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        overlay.style.cssText =
+          'transform:translateX(101%);' +
+          'transition:transform ' + DUR_IN + 'ms ' + EASE;
+      });
+    });
+
+    // Exit: overlay sweeps in from right, then navigate
     document.querySelectorAll('a[href]').forEach(function (link) {
       var href = link.getAttribute('href');
-      if (!href || href.charAt(0) === '#' || href.indexOf('mailto:') === 0 || href.indexOf('http') === 0) return;
+      if (!href || href.charAt(0) === '#' ||
+          href.indexOf('mailto:') === 0 || href.indexOf('http') === 0) return;
       link.addEventListener('click', function (e) {
+        if (e.metaKey || e.ctrlKey || e.shiftKey) return;
         e.preventDefault();
-        document.body.classList.add('page-leaving');
-        setTimeout(function () { window.location.href = href; }, 210);
+        overlay.style.cssText =
+          'transform:translateX(101%);transition:none';
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            overlay.style.cssText =
+              'transform:translateX(0);' +
+              'transition:transform ' + DUR_OUT + 'ms ' + EASE;
+            setTimeout(function () {
+              window.location.href = href;
+            }, DUR_OUT);
+          });
+        });
       });
     });
   }
