@@ -118,6 +118,7 @@
     { href: 'index.html',    label: 'Home' },
     { href: 'approach.html', label: 'Our approach' },
     { href: 'work.html',     label: 'Our work' },
+    { href: 'people.html',   label: 'Our people' },
     { href: 'contact.html',  label: 'Contact' },
   ];
 
