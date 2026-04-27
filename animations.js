@@ -132,6 +132,7 @@
   function setupNav() {
     var nav = document.getElementById('site-nav');
     if (!nav) return;
+
     var page = window.location.pathname.split('/').pop() || 'index.html';
     nav.innerHTML = '';
     NAV_LINKS.forEach(function (link) {
@@ -140,6 +141,37 @@
       a.textContent = link.label;
       if (page === link.href) a.className = 'active';
       nav.appendChild(a);
+    });
+
+    // Mobile hamburger
+    var toggle = document.createElement('button');
+    toggle.className = 'nav-toggle';
+    toggle.setAttribute('aria-label', 'Open menu');
+    toggle.setAttribute('aria-controls', 'site-nav');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.innerHTML = '<span></span><span></span><span></span>';
+    nav.parentNode.insertBefore(toggle, nav.nextSibling);
+
+    function closeMenu() {
+      nav.classList.remove('nav--open');
+      document.body.classList.remove('nav-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open menu');
+    }
+
+    toggle.addEventListener('click', function () {
+      var isOpen = nav.classList.toggle('nav--open');
+      document.body.classList.toggle('nav-open', isOpen);
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    });
+
+    nav.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') closeMenu();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('nav--open')) closeMenu();
     });
   }
 
@@ -173,24 +205,29 @@
     });
 
     // Exit: overlay sweeps in from right, then navigate
-    document.querySelectorAll('a[href]').forEach(function (link) {
+    // Uses event delegation to catch nav links added by setupNav()
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest('a[href]');
+      if (!link) return;
       var href = link.getAttribute('href');
       if (!href || href.charAt(0) === '#' ||
           href.indexOf('mailto:') === 0 || href.indexOf('http') === 0) return;
-      link.addEventListener('click', function (e) {
-        if (e.metaKey || e.ctrlKey || e.shiftKey) return;
-        e.preventDefault();
-        overlay.style.cssText =
-          'transform:translateX(101%);transition:none';
+      if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+      e.preventDefault();
+      // Close mobile nav if open
+      var nav = document.getElementById('site-nav');
+      if (nav) nav.classList.remove('nav--open');
+      document.body.classList.remove('nav-open');
+      overlay.style.cssText =
+        'transform:translateX(101%);transition:none';
+      requestAnimationFrame(function () {
         requestAnimationFrame(function () {
-          requestAnimationFrame(function () {
-            overlay.style.cssText =
-              'transform:translateX(0);' +
-              'transition:transform ' + DUR_OUT + 'ms ' + EASE;
-            setTimeout(function () {
-              window.location.href = href;
-            }, DUR_OUT);
-          });
+          overlay.style.cssText =
+            'transform:translateX(0);' +
+            'transition:transform ' + DUR_OUT + 'ms ' + EASE;
+          setTimeout(function () {
+            window.location.href = href;
+          }, DUR_OUT);
         });
       });
     });
